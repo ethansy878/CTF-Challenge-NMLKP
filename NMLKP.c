@@ -81,24 +81,31 @@ void printPerson(char person[]){
     printf("%s is at the party.\n", person);
 }
 
-void grepModified(char person[], char pattern[]) {
+int grepModified(char person[], char pattern[], int option){
     /* holder function for string search logic */
 
     int index = strindex(person, pattern);
     if (index >= 0) {
-        printPerson(person);
+        if (option == 0){ // option 0- regular print, increment
+            printPerson(person);
+            return 0;
+        }
+        else { // option 1- overflow
+            return 1;
+        }
     }
+    return -1;
 }
 
 int main(){
     puts("I am NameLookup, or NMLKP for short.");
     puts("I will find people at the party that match your search query.");
-    printf("I can only handle up to %d characters at once.\n", 
+    printf("I can only handle up to %d characters and people at once.\n", 
     (INPUT_MAX-1));
     
     char input[INPUT_MAX] = "\0\0\0\0\0";
     int running = 1;
-
+    
     while (running) {
         printf("\n[NMLKP]: ");
         fgets(input, INPUT_MAX, stdin);
@@ -123,9 +130,25 @@ int main(){
             }
         }
 
+        int namesPrinted = 0;
+        int namesOverflowed = 0;
+        int option = 0;
+        // 0- normal, 1- overflow
+
         printf("Searching \"%s\"\n", input);
         for (int i=0; i < PEOPLE_AT_PARTY; i++){
-            grepModified(nameList[i], input);
+            int result; 
+            result = grepModified(nameList[i], input, option);
+            if (result == 0){
+                namesPrinted++;
+                if (namesPrinted == 5)
+                    option = 1;
+            }
+            if (result == 1){
+                namesOverflowed++;
+            }
         }
+        if (namesOverflowed > 0)
+            printf("...+%d others.\n", namesOverflowed);
     }
 }
