@@ -37,7 +37,7 @@ char targetList[PEOPLE_TARGETED][MAX_NAME_LENGTH] =
 {"NMLKP", "Michael", "Stephanie", "Amy", "Dennis", "Jennifer"};
 
 char encodeList[PEOPLE_TARGETED][MAX_ENCODE_LENGTH] =
-{"[INCOMING TRANSMISSION] VGhlcmUgYXJlIGEgaHVuZHJlZCBwZW9wbGUgaGVyZSBhbmQgdGhlaXIgbmFtZXMgYWxsIGxvb2sgZmFtaWxpYXIuIFJlbWluZHMgbWUgb2YgYUhSMGNITTZMeTkzZDNjdWMzTmhMbWR2ZGk5dllXTjBMMkpoWW5sdVlXMWxjeTlrWldOaFpHVnpMMk5sYm5SMWNua3VhSFJ0YkE= [END TRANSMISSION]", "SGUncyBteSBmaXJzdCB0YXJnZXQ", "SSdtIGFmdGVyIGhlciBzZWNvbmQ", "VGhpcmQgaW4gbGluZQ", "Rm91cnRoIG9uIHRoZSBsaXN0", "RmlmdGggYW5kIGZpbmFsbHk"};
+{"[NMLKP TRANSMISSION] VGhlcmUgYXJlIGEgaHVuZHJlZCBwZW9wbGUgaGVyZSBhbmQgdGhlaXIgbmFtZXMgYWxsIGxvb2sgZmFtaWxpYXIuIFJlbWluZHMgbWUgb2YgYUhSMGNITTZMeTkzZDNjdWMzTmhMbWR2ZGk5dllXTjBMMkpoWW5sdVlXMWxjeTlrWldOaFpHVnpMMk5sYm5SMWNua3VhSFJ0YkE= [END TRANSMISSION]", "SGUncyBteSBmaXJzdCB0YXJnZXQ", "SSdtIGFmdGVyIGhlciBzZWNvbmQ", "VGhpcmQgaW4gbGluZQ", "Rm91cnRoIG9uIHRoZSBsaXN0", "RmlmdGggYW5kIGZpbmFsbHk"};
 
 void flush(){
     int c;
@@ -78,7 +78,7 @@ void printPerson(char person[]){
             return;
         }
     }
-    printf("%s is at the party.\n", person);
+    printf(">> %s is at the party.\n", person);
 }
 
 int grepModified(char person[], char pattern[], int option){
@@ -105,13 +105,13 @@ int main(){
     
     char input[INPUT_MAX] = "\0\0\0\0\0";
     int running = 1;
-    int attempts = 0;
+    int attempts = 1;
     
     while (running) {
         // pity system
-        if (attempts == 50){
-            printf("By the way, I am \"at\" the party too. ");
-            printf("Try searching for my name.\n");
+        if (attempts % 50 == 0){
+            printf("[NMLKP] By the way, I am \"at\" the party too. ");
+            printf("Try searching my name.\n");
         }
 
         // input here
@@ -143,7 +143,7 @@ int main(){
         int option = 0;
         // 0 - normal, 1 - overflow
 
-        printf("Searching \"%s\"\n", input);
+        printf("Searching \"%s\"...\n", input);
         for (int i=0; i < PEOPLE_AT_PARTY; i++){
             int result; 
             result = grepModified(nameList[i], input, option);
@@ -157,7 +157,7 @@ int main(){
             }
         }
         if (namesOverflowed > 0)
-            printf("...+%d others.\n", namesOverflowed);
+            printf("... +%d others.\n", namesOverflowed);
         attempts++;
     }
 }
