@@ -1,4 +1,4 @@
-# NMLKP (NameLookup)
+# NMLKP
 
 ## Test Status: Needs Testing
 

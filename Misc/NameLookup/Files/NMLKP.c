@@ -1,4 +1,4 @@
-//{MichaelStephanieAmyDennisJennifer}
+//broncoctf{MichaelStephanieAmyDennisJennifer}
 //https://www.ssa.gov/oact/babynames/decades/century.html
 
 #include <stdio.h>
@@ -86,7 +86,7 @@ int grepModified(char person[], char pattern[], int option){
 
     int index = strindex(person, pattern);
     if (index >= 0) {
-        if (option == 0){ // option 0- regular print, increment
+        if (option == 0){ // option 0- regular print
             printPerson(person);
             return 0;
         }
@@ -105,8 +105,16 @@ int main(){
     
     char input[INPUT_MAX] = "\0\0\0\0\0";
     int running = 1;
+    int attempts = 0;
     
     while (running) {
+        // pity system
+        if (attempts == 50){
+            printf("By the way, I am \"at\" the party too. ");
+            printf("Try searching for my name.\n");
+        }
+
+        // input here
         printf("\n[NMLKP]: ");
         fgets(input, INPUT_MAX, stdin);
 
@@ -133,7 +141,7 @@ int main(){
         int namesPrinted = 0;
         int namesOverflowed = 0;
         int option = 0;
-        // 0- normal, 1- overflow
+        // 0 - normal, 1 - overflow
 
         printf("Searching \"%s\"\n", input);
         for (int i=0; i < PEOPLE_AT_PARTY; i++){
@@ -150,5 +158,6 @@ int main(){
         }
         if (namesOverflowed > 0)
             printf("...+%d others.\n", namesOverflowed);
+        attempts++;
     }
 }
