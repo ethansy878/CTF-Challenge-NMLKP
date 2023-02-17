@@ -1,6 +1,3 @@
-//broncoctf{MichaelStephanieAmyDennisJennifer}
-//https://www.ssa.gov/oact/babynames/decades/century.html
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
