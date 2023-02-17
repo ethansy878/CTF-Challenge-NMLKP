@@ -10,6 +10,9 @@
 
 5. Put the names in order, wrap in broncoctf{}, submit!
 
+The flag is:
+broncoctf{MichaelStephanieAmyDennisJennifer}
+
 
 Note: Not all steps are necessary to complete the challenge. The hints from searching "NMLKP" help, but are not mandatory.
 A user can also try reversing the program and see what they find doing so. The order of names is stored in a regular char[][] array in the correct order and with no obfuscation. They may be able to find the names and the order this way.
